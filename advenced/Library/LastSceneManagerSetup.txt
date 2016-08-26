@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/10.GL/10.gl.1.unity
+  isLoaded: 1
+  isActive: 1
