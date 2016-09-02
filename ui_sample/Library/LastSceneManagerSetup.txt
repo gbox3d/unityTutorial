@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/exam7_uirx_inp_compoent/ex7.input.unity
+  isLoaded: 1
+  isActive: 1
