@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/rxex5_trigger_mouse/rxex5_trigger_mouse.unity
+  isLoaded: 1
+  isActive: 1

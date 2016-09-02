@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/udpex2/updex2.unity
+- path: Assets/uiex3/ex3.btnclick.unity
   isLoaded: 1
   isActive: 1
