@@ -12,9 +12,9 @@ public class rxex5_trigger_mouse : MonoBehaviour {
 	void Start () {
 
 		float camdist = Vector3.Distance(  Camera.main.transform.position,transform.position );
-		ObservableUpdateTrigger obv_ut = gameObject.AddComponent<ObservableUpdateTrigger> ();
 
-		//ObservableUpdateTrigger obv_ut = this.UpdateAsObservable();
+		ObservableUpdateTrigger obv_ut = gameObject.AddComponent<ObservableUpdateTrigger> ();
+		//var obv_ut = this;
 
 		obv_ut.OnMouseDownAsObservable ()
 			.Subscribe (_ => {

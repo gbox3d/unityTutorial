@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine.UI;
 using System;
 
@@ -9,7 +10,9 @@ public class rxex1_main : MonoBehaviour {
 	[SerializeField] private Text textResult;
 	
 	void Start () {
-		
+
+		//global mouse down event 
+
 		var clickStream = Observable.EveryUpdate()
 			.Where(_ => Input.GetMouseButtonDown(0));
 
@@ -23,6 +26,8 @@ public class rxex1_main : MonoBehaviour {
 			}
 			
 		);
+		
+
 	
 	}
 	

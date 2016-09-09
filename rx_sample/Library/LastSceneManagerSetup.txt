@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/rxex5_trigger_mouse/rxex5_trigger_mouse.unity
+- path: Assets/rxex6_timer/rxex6_timer.unity
   isLoaded: 1
   isActive: 1
