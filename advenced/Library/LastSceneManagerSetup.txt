@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/10.GL/10.gl.1.unity
+- path: Assets/udpex1/udpex1_3.unity
   isLoaded: 1
   isActive: 1
