@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scenes/ex11.picking.unity
+- path: Assets/exam10/ex10.makegameobject.unity
   isLoaded: 1
   isActive: 1
