@@ -10,13 +10,16 @@ public class rxex3_pick_and_roll : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		var obs = gameObject.AddComponent<ObservableUpdateTrigger> ();
-		obs.UpdateAsObservable()                      
-			.SkipUntil( obs.OnMouseDownAsObservable() ) 
+		//var obs = gameObject.AddComponent<ObservableUpdateTrigger> ();
+		IObservable<Unit> stream_update = this.UpdateAsObservable ();
+
+		//obs.UpdateAsObservable()                      
+		stream_update
+			.SkipUntil( this.OnMouseDownAsObservable() ) 
 			.Select(
 				_ => new Vector2(Input.GetAxis("Mouse X"),Input.GetAxis("Mouse Y")))
-			.TakeUntil( obs.OnMouseUpAsObservable())   
-			.Repeat()                             
+			.TakeUntil( this.OnMouseUpAsObservable())   
+			.Repeat()       
 			.Subscribe(
 				(move) => {
 					transform.rotation =
@@ -26,7 +29,8 @@ public class rxex3_pick_and_roll : MonoBehaviour {
 				}
 			);
 
-		obs.UpdateAsObservable ()
+		//obs.UpdateAsObservable ()
+		stream_update
 			.Select (_ => Input.GetButtonDown ("Fire1"))
 			.Where(x=>x)
 			.Subscribe (

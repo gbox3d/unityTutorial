@@ -38,6 +38,7 @@ public class udpex1_main : MonoBehaviour {
 		while(!text.Equals("exit"));
 	}
 	*/
+
 	// start from unity3d
 	public void Start()
 	{

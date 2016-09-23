@@ -132,6 +132,9 @@ public class udpex2_main : MonoBehaviour {
 
 	void OnDestroy() {
 		Debug.Log("Script was destroyed");
+		client.Close ();
 		receiveThread.Abort ();
+
+
 	}
 }

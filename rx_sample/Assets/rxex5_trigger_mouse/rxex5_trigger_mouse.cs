@@ -13,30 +13,32 @@ public class rxex5_trigger_mouse : MonoBehaviour {
 
 		float camdist = Vector3.Distance(  Camera.main.transform.position,transform.position );
 
-		ObservableUpdateTrigger obv_ut = gameObject.AddComponent<ObservableUpdateTrigger> ();
+		//ObservableUpdateTrigger obv_ut = this.
+		//ObservableUpdateTrigger obv_ut = gameObject.AddComponent<ObservableUpdateTrigger> ();
+		//ObservableUpdateTrigger obv_ut = gameObject.GetComponent<ObservableUpdateTrigger> ();
 		//var obv_ut = this;
 
-		obv_ut.OnMouseDownAsObservable ()
+		this.OnMouseDownAsObservable ()
 			.Subscribe (_ => {
 				gameObject.GetComponent<Renderer>().material.color = Color.red;
 			}
 		);
 
-		obv_ut.OnMouseExitAsObservable ()
+		this.OnMouseExitAsObservable ()
 			.Subscribe (
 				_=> {
 					gameObject.GetComponent<Renderer>().material.color = Color.green;
 				}
 			);
 
-		obv_ut.OnMouseEnterAsObservable ()
+		this.OnMouseEnterAsObservable ()
 			.Subscribe (
 				_=> {
 					gameObject.GetComponent<Renderer>().material.color = Color.blue;
 				}
 		);
 		
-		obv_ut.OnMouseDragAsObservable()
+		this.OnMouseDragAsObservable()
 			.TakeUntilDestroy(this)          
 			.Select(_ => Input.mousePosition)
 			.Subscribe((pos) => {
