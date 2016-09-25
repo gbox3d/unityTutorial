@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/exam10/ex10.makegameobject.unity
+- path: Assets/exam5/ex5.collider.unity
   isLoaded: 1
   isActive: 1

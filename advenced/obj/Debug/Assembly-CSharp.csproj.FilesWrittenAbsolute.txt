@@ -16,3 +16,6 @@
 /Users/gunpower/Desktop/unity/unityTutorial/advenced/Temp/bin/Debug/Assembly-CSharp.dll
 /Users/gunpower/Desktop/unity/unityTutorial/advenced/obj/Debug/Assembly-CSharp.dll
 /Users/gunpower/Desktop/unity/unityTutorial/advenced/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/gunpower/Desktop/unity/unityTutorial/advenced/Temp/bin/Debug/LitJson.dll
+/Users/gunpower/Desktop/unity/unityTutorial/advenced/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/gunpower/Desktop/unity/unityTutorial/advenced/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
