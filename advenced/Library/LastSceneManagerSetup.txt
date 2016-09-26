@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/udpex3/udpex3.unity
+- path: Assets/ex4.collusion/3.kinetic/ex4.coll.kinetic.unity
   isLoaded: 1
   isActive: 1
