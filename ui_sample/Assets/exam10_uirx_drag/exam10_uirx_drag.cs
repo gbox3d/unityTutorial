@@ -10,10 +10,6 @@ public class exam10_uirx_drag : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-		//Debug.Log (gameObject.GetComponent<RectTransform>().rect.ToString());
-		//Debug.Log (gameObject.GetComponent<RectTransform>().position.ToString());
-		//Debug.Log (rect_area.ToString());
 
 		int FSM = 0;
 
