@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/exam4_uievent/exam4.unity
+- path: Assets/exam9_uirx_instantiate/exam9.unity
   isLoaded: 1
   isActive: 1

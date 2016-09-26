@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ex4.collusion/3.kinetic/ex4.coll.kinetic.unity
+- path: Assets/ex6_container_adv/ex6.container.unity
   isLoaded: 1
   isActive: 1
