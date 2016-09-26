@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/exam9_uirx_instantiate/exam9.unity
+- path: Assets/exam10_uirx_drag/exam10_uirx_drag.unity
   isLoaded: 1
   isActive: 1
