@@ -10,9 +10,7 @@ public class exam10_uirx_drag : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-
-
+		
 		gameObject.UpdateAsObservable ()
 			.Select (_ => {
 				Vector3 pos = Input.mousePosition;
@@ -25,8 +23,9 @@ public class exam10_uirx_drag : MonoBehaviour {
 				//Debug.Log( Mathf.RoundToInt( pos.x) + " , " +  Mathf.RoundToInt( pos.y) );
 				if(hover == true) gameObject.GetComponent<Image>().color = Color.red;
 				else gameObject.GetComponent<Image>().color = Color.green;
-				
 		});
+
+
 
 		/*
 		int FSM = 0;
