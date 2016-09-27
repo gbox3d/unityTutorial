@@ -62,32 +62,42 @@ public class exam10_uirx_drag : MonoBehaviour {
 				//gameObject.GetComponent<RectTransform> ().position += new Vector3(pos.x,pos.y,0);
 				gameObject.GetComponent<RectTransform> ().Translate( new Vector3(pos.x,pos.y,0) );
 				//Debug.Log(pos.ToString());
-			
-				
 		});
 		*/
 
 
+
+
 		IObservable<Vector3[]> down_stream = Observable.EveryUpdate()
-			.Select (_ => Input.GetMouseButtonDown (0))
+			.Select (_ => Input.GetMouseButton(0))
 			.Where (x => x)
+			.DistinctUntilChanged()
 			.Select (_ => {
 				//Vector3 pos = Input.mousePosition;
 				Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
 				return ar;
 			});
 		
-		IObservable<Vector3[]> move_stream = Observable.EveryUpdate()
+		IObservable<Vector3[]> move_stream = Observable.EveryUpdate ()
 			.Select (_ => {
-				Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
-				return ar;
-			});
+			Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
+			return ar;
+		});
 
-		IObservable<long> up_stream = Observable.EveryUpdate()
+		IObservable<long> up_stream = Observable.EveryUpdate ()
 			.Where (_ => {
-				Debug.Log(Input.GetMouseButton(0).ToString());
-				return !Input.GetMouseButton(0);
-			} );
+			//Debug.Log (Input.GetMouseButton (0).ToString ());
+				Vector3 pos = Input.mousePosition;
+				Vector3 pos_tran = gameObject.GetComponent<RectTransform>().position;
+				Vector2 mpos =  new Vector2(pos.x - pos_tran.x,pos.y - pos_tran.y);
+
+				if(gameObject.GetComponent<RectTransform>().rect.Contains(mpos)) {
+					return !Input.GetMouseButton (0);
+				}
+
+				return true;
+
+			});
 
 		Observable.CombineLatest<Vector3[]> (down_stream, move_stream)
 			.Select ( _=> {
@@ -100,8 +110,10 @@ public class exam10_uirx_drag : MonoBehaviour {
 			.Repeat()
 			.Subscribe ((pos) => {
 				gameObject.GetComponent<RectTransform> ().position = pos;
-				//Debug.Log(pos.ToString());
-		});
+				Debug.Log("drag");
+			});
+		
+		
 
 
 
