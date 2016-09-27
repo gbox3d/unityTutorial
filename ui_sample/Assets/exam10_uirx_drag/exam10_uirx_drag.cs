@@ -10,7 +10,8 @@ public class exam10_uirx_drag : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+
 		gameObject.UpdateAsObservable ()
 			.Select (_ => {
 				Vector3 pos = Input.mousePosition;
@@ -24,6 +25,7 @@ public class exam10_uirx_drag : MonoBehaviour {
 				if(hover == true) gameObject.GetComponent<Image>().color = Color.red;
 				else gameObject.GetComponent<Image>().color = Color.green;
 		});
+		
 
 
 		//drag 
@@ -66,31 +68,39 @@ public class exam10_uirx_drag : MonoBehaviour {
 		*/
 
 
-		IObservable<Vector3> down_stream = Observable.EveryUpdate()
+		IObservable<Vector3[]> down_stream = Observable.EveryUpdate()
 			.Select (_ => Input.GetMouseButtonDown (0))
 			.Where (x => x)
-			.Select (_ => Input.mousePosition);
+			.Select (_ => {
+				//Vector3 pos = Input.mousePosition;
+				Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
+				return ar;
+			});
 		
-		IObservable<Vector3> move_stream = Observable.EveryUpdate()
-			.Select (_ => Input.mousePosition);
-
-		IObservable<bool> up_stream = Observable.EveryUpdate()
-			.Select ((_) => {
-				return Input.GetMouseButton(0);
-				//Debug.Log(Input.GetMouseButton(0).ToString());
-				//return false;
-				//return true;
+		IObservable<Vector3[]> move_stream = Observable.EveryUpdate()
+			.Select (_ => {
+				Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
+				return ar;
 			});
 
-		Observable.CombineLatest<Vector3> (down_stream, move_stream)
-			.Select (_ => {
-				return _ [0] - _ [1];
+		IObservable<long> up_stream = Observable.EveryUpdate()
+			.Where (_ => {
+				Debug.Log(Input.GetMouseButton(0).ToString());
+				return !Input.GetMouseButton(0);
+			} );
+
+		Observable.CombineLatest<Vector3[]> (down_stream, move_stream)
+			.Select ( _=> {
+				Vector3[] down_stream_data = _[0];
+				Vector3[] move_stream_data = _[1];
+				Vector3 mouse_dif = move_stream_data[0] - down_stream_data[0];
+				return down_stream_data[1] + mouse_dif;
 		})
 			.TakeUntil (up_stream)
 			.Repeat()
-			.Subscribe ((dif) => {
-
-				Debug.Log(dif.ToString());
+			.Subscribe ((pos) => {
+				gameObject.GetComponent<RectTransform> ().position = pos;
+				//Debug.Log(pos.ToString());
 		});
 
 
