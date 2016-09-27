@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using UnityEngine.UI;
@@ -10,154 +10,36 @@ public class exam10_uirx_drag : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		/* Hover */
+		this.UpdateAsObservable ()
+			.Select (_ => this.GetComponent<RectTransform> ().rect.Contains (
+				Input.mousePosition - this.transform.position
+			))
+			.DistinctUntilChanged () // remove duplicates
+			.Subscribe (isHover => this.GetComponent<Image> ().color = 
+				isHover ? Color.red : Color.green
+		);
 
+		/* Drag and Drop */
+		var downStream = this.UpdateAsObservable ()
+			.Where (_ => Input.GetMouseButtonDown (0))
+			.Select (_ => Input.mousePosition - this.transform.position);
 
-		gameObject.UpdateAsObservable ()
-			.Select (_ => {
-				Vector3 pos = Input.mousePosition;
-				Vector3 pos_tran = gameObject.GetComponent<RectTransform>().position;
-				return new Vector2(pos.x - pos_tran.x,pos.y - pos_tran.y);
-			})
-			.Select(pos=>gameObject.GetComponent<RectTransform>().rect.Contains(pos))
-			.DistinctUntilChanged() // remove samethings
-			.Subscribe ((hover) => {
-				//Debug.Log( Mathf.RoundToInt( pos.x) + " , " +  Mathf.RoundToInt( pos.y) );
-				if(hover == true) gameObject.GetComponent<Image>().color = Color.red;
-				else gameObject.GetComponent<Image>().color = Color.green;
-		});
-		
+		/* capture position stream */
+		var moveStream = this.UpdateAsObservable ()
+			.Where (_ => Input.GetMouseButton (0)) /* anyway */
+			.Select (_ => Input.mousePosition)     /* but, capture mousePosition only */
+			.DistinctUntilChanged ();
 
+		/* only once triggered, doesn't need distinct */
+		var upStream = this.UpdateAsObservable ()
+			.Where (_ => Input.GetMouseButtonUp (0)); /* when mouse move */
 
-		//drag 
-		/*
-		Vector3 old_pos = Input.mousePosition;
-		gameObject.UpdateAsObservable ()
-			.Select (_ => Input.GetMouseButton (0))
-			.Where ((x) => {
-				if(x == false) {
-					old_pos = Input.mousePosition;
-				}
-				return x;
-			})
-			.Select (_ => {
-				Vector3 pos = Input.mousePosition;
-				Vector3 pos_tran = gameObject.GetComponent<RectTransform> ().position;
-				return new Vector2 (pos.x - pos_tran.x, pos.y - pos_tran.y);
-			})
-			.Where ((pos) => {
-				if(gameObject.GetComponent<RectTransform> ().rect.Contains (pos)) return true;
-				else {
-					old_pos = Input.mousePosition;;
-					return false;
-				}
-			})
-			.Select (_ => {
-				Vector2 rst_pos =  Input.mousePosition - old_pos;
-				old_pos = Input.mousePosition;
-				return rst_pos;
-			})
-			.DistinctUntilChanged ()
-			.Subscribe ((pos) => {
-				//gameObject.GetComponent<RectTransform> ().localPosition += new Vector3(pos.x,pos.y,0);
-				//gameObject.GetComponent<RectTransform> ().position += new Vector3(pos.x,pos.y,0);
-				gameObject.GetComponent<RectTransform> ().Translate( new Vector3(pos.x,pos.y,0) );
-				//Debug.Log(pos.ToString());
-		});
-		*/
-
-
-
-
-		IObservable<Vector3[]> down_stream = Observable.EveryUpdate()
-			.Select (_ => Input.GetMouseButton(0))
-			.Where (x => x)
-			.DistinctUntilChanged()
-			.Select (_ => {
-				//Vector3 pos = Input.mousePosition;
-				Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
-				return ar;
-			});
-		
-		IObservable<Vector3[]> move_stream = Observable.EveryUpdate ()
-			.Select (_ => {
-			Vector3[] ar = { Input.mousePosition, gameObject.GetComponent<RectTransform> ().position };
-			return ar;
-		});
-
-		IObservable<long> up_stream = Observable.EveryUpdate ()
-			.Where (_ => {
-			//Debug.Log (Input.GetMouseButton (0).ToString ());
-				Vector3 pos = Input.mousePosition;
-				Vector3 pos_tran = gameObject.GetComponent<RectTransform>().position;
-				Vector2 mpos =  new Vector2(pos.x - pos_tran.x,pos.y - pos_tran.y);
-
-				if(gameObject.GetComponent<RectTransform>().rect.Contains(mpos)) {
-					return !Input.GetMouseButton (0);
-				}
-
-				return true;
-
-			});
-
-		Observable.CombineLatest<Vector3[]> (down_stream, move_stream)
-			.Select ( _=> {
-				Vector3[] down_stream_data = _[0];
-				Vector3[] move_stream_data = _[1];
-				Vector3 mouse_dif = move_stream_data[0] - down_stream_data[0];
-				return down_stream_data[1] + mouse_dif;
-		})
-			.TakeUntil (up_stream)
-			.Repeat()
-			.Subscribe ((pos) => {
-				gameObject.GetComponent<RectTransform> ().position = pos;
-				Debug.Log("drag");
-			});
-		
-		
-
-
-
-
-		/*
-		int FSM = 0;
-		gameObject.UpdateAsObservable ()
-			.Select (_ => Input.mousePosition)
-			.Where((pos)=> {
-				Vector3 pos_tran = gameObject.GetComponent<RectTransform>().position;
-				Vector2 mouse_pos = new Vector2(
-					pos.x - pos_tran.x,
-					pos.y - pos_tran.y);
-
-
-				if(gameObject.GetComponent<RectTransform>().rect.Contains(mouse_pos)) {
-
-					return false;
-				}
-
-				if(FSM == 0) return false;
-				else {
-					FSM = 0;
-				}
-
-				return true;
-
-			})
-			.Subscribe ((pos) => {
-				Debug.Log( Mathf.RoundToInt( pos.x) + " , " +  Mathf.RoundToInt( pos.y) );
-				gameObject.GetComponent<Image>().color = Color.green;
-
-
-			});
-
-*/
-
-
-
-
-
-
-
-	
+		Observable.CombineLatest<Vector3> (downStream, moveStream)
+			.Select (_ => _[1]-_[0])
+			.TakeUntil (upStream)
+			.Repeat ()
+			.Subscribe (position => this.transform.position = position);
 	}
 	
 	// Update is called once per frame
