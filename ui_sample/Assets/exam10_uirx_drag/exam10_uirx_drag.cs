@@ -27,6 +27,7 @@ public class exam10_uirx_drag : MonoBehaviour {
 
 
 		//drag 
+		/*
 		Vector3 old_pos = Input.mousePosition;
 		gameObject.UpdateAsObservable ()
 			.Select (_ => Input.GetMouseButton (0))
@@ -55,13 +56,42 @@ public class exam10_uirx_drag : MonoBehaviour {
 			})
 			.DistinctUntilChanged ()
 			.Subscribe ((pos) => {
-				gameObject.GetComponent<RectTransform> ().localPosition += new Vector3(pos.x,pos.y,0);
-				Debug.Log(pos.ToString());
+				//gameObject.GetComponent<RectTransform> ().localPosition += new Vector3(pos.x,pos.y,0);
+				//gameObject.GetComponent<RectTransform> ().position += new Vector3(pos.x,pos.y,0);
+				gameObject.GetComponent<RectTransform> ().Translate( new Vector3(pos.x,pos.y,0) );
+				//Debug.Log(pos.ToString());
 			
 				
 		});
-		
+		*/
 
+
+		IObservable<Vector3> down_stream = Observable.EveryUpdate()
+			.Select (_ => Input.GetMouseButtonDown (0))
+			.Where (x => x)
+			.Select (_ => Input.mousePosition);
+		
+		IObservable<Vector3> move_stream = Observable.EveryUpdate()
+			.Select (_ => Input.mousePosition);
+
+		IObservable<bool> up_stream = Observable.EveryUpdate()
+			.Select ((_) => {
+				return Input.GetMouseButton(0);
+				//Debug.Log(Input.GetMouseButton(0).ToString());
+				//return false;
+				//return true;
+			});
+
+		Observable.CombineLatest<Vector3> (down_stream, move_stream)
+			.Select (_ => {
+				return _ [0] - _ [1];
+		})
+			.TakeUntil (up_stream)
+			.Repeat()
+			.Subscribe ((dif) => {
+
+				Debug.Log(dif.ToString());
+		});
 
 
 
