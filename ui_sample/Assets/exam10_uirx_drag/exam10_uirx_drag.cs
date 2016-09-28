@@ -21,18 +21,18 @@ public class exam10_uirx_drag : MonoBehaviour {
 		);
 
 		/* Drag and Drop */
-		var downStream = this.UpdateAsObservable ()
+		var downStream = Observable.EveryUpdate()//.UpdateAsObservable ()
 			.Where (_ => Input.GetMouseButtonDown (0))
 			.Select (_ => Input.mousePosition - this.transform.position);
 
 		/* capture position stream */
-		var moveStream = this.UpdateAsObservable ()
+		var moveStream =  Observable.EveryUpdate()//this.UpdateAsObservable ()
 			.Where (_ => Input.GetMouseButton (0)) /* anyway */
 			.Select (_ => Input.mousePosition)     /* but, capture mousePosition only */
 			.DistinctUntilChanged ();
 
 		/* only once triggered, doesn't need distinct */
-		var upStream = this.UpdateAsObservable ()
+		var upStream =  Observable.EveryUpdate()//this.UpdateAsObservable ()
 			.Where (_ => Input.GetMouseButtonUp (0)); /* when mouse move */
 
 		Observable.CombineLatest<Vector3> (downStream, moveStream)
