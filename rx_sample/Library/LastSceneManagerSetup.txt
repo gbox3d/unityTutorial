@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/rxex9_thread/rxex9.unity
+- path: Assets/rxex10_combine/rxex10_combine.unity
   isLoaded: 1
   isActive: 1
