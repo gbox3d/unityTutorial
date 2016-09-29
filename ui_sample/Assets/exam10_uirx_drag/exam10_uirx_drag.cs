@@ -24,8 +24,8 @@ public class exam10_uirx_drag : MonoBehaviour {
 		var downStream = Observable.EveryUpdate()//.UpdateAsObservable ()
 			//.Where (_ => Input.GetMouseButton (0))
 			.Select (_ => Input.GetMouseButton(0))
+			.DistinctUntilChanged() //it's likes Input.GetMouseButton (0)
 			.Where (x => x)
-			//.DistinctUntilChanged()
 			.Select (_ => {
 				//Debug.Log("down start! : " + Time.realtimeSinceStartup);
 				Debug.Log( " downstream " + (Input.mousePosition - this.transform.position).ToString() + " : " + Time.realtimeSinceStartup);
