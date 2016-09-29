@@ -16,34 +16,31 @@ public class exam10_uirx_drag : MonoBehaviour {
 				Input.mousePosition - this.transform.position
 			))
 			.DistinctUntilChanged () // remove duplicates
-			.Subscribe (isHover => this.GetComponent<Image> ().color = 
+			.Subscribe (isHover => this.GetComponent<Image> ().color =
 				isHover ? Color.red : Color.green
 		);
 
 		/* Drag and Drop */
-		var downStream = Observable.EveryUpdate()//.UpdateAsObservable ()
-			.Where (_ => Input.GetMouseButtonDown (0))
-			.Select (_ => Input.mousePosition - this.transform.position);
+		var downStream = this.UpdateAsObservable ()
+			.Where (_ => Input.GetMouseButtonDown (0)) /* when mouse down capture delta position */
+			.Select (_ => Input.mousePosition - this.transform.position)
+			.Do (_ => Debug.Log ( "mouseDown" + _));
 
 		/* capture position stream */
-		var moveStream =  Observable.EveryUpdate()//this.UpdateAsObservable ()
+		var moveStream = this.UpdateAsObservable ()
 			.Where (_ => Input.GetMouseButton (0)) /* anyway */
-			.Select (_ => Input.mousePosition)     /* but, capture mousePosition only */
-			.DistinctUntilChanged ();
-
-		/* only once triggered, doesn't need distinct */
-		var upStream =  Observable.EveryUpdate()//this.UpdateAsObservable ()
-			.Where (_ => Input.GetMouseButtonUp (0)); /* when mouse move */
-
+			.Select (_ => Input.mousePosition)     /* but, mousePosition only */
+			.DistinctUntilChanged ()
+			.Do (_ => Debug.Log ( "mouseMove" + _));
+		
 		Observable.CombineLatest<Vector3> (downStream, moveStream)
 			.Select (_ => _[1]-_[0])
-			.TakeUntil (upStream)
-			.Repeat ()
-			.Subscribe (position => this.transform.position = position);
+			.Subscribe (position => this.transform.position = position)
+			.AddTo(this.gameObject); /* add to disposable */
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }
