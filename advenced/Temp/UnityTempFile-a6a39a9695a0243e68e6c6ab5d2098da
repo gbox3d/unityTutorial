@@ -90,6 +90,7 @@
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
 'Assets/ex1.prj_matrix/ex1_prjmatrix.cs'
+'Assets/ex10.lamda/ex10_Lamda.cs'
 'Assets/ex11.www/ex11_req1.cs'
 'Assets/ex2.containers/ex2_1.cs'
 'Assets/ex3.tranform/control/ex3_plot_ctrl.cs'
@@ -107,7 +108,7 @@
 'Assets/ex6_container_adv/ex6_main.cs'
 'Assets/ex7.regex/ex7_regex.cs'
 'Assets/ex8_delegate/ex8_deligate.cs'
-'Assets/ex9.hash/ex9_HashTest.cs'
+'Assets/ex9.hash_with_delegate/ex9_HashTest.cs'
 'Assets/json_exam1/json_exam1.cs'
 'Assets/json_exam2/json_exam2.cs'
 'Assets/thread_exam1/thread_exam1.cs'

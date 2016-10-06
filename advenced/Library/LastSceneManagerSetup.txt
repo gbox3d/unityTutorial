@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ex8_delegate/ex8.unity
+- path: Assets/ex9.hash_with_delegate/scene.unity
   isLoaded: 1
   isActive: 1
