@@ -3,17 +3,22 @@ using System.Collections;
 using UniRx;
 using System;
 
+using UnityEngine.UI;
+
 public class rxex6_timer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
 
-		Observable.Interval (TimeSpan.FromMilliseconds (1000))
+
+		Button btn_stop = GameObject.Find ("Button_stop").GetComponent<Button>();
+
+		IDisposable stream1 = Observable.Interval (TimeSpan.FromMilliseconds (1000))
 			.Subscribe (
-				_=> {
-					Debug.Log("tick :" + Time.realtimeSinceStartup);
-				}
-			);
+			              _ => {
+				Debug.Log ("tick :" + Time.realtimeSinceStartup);
+			}
+		              );
 
 		//Observable.Timer
 
@@ -23,7 +28,15 @@ public class rxex6_timer : MonoBehaviour {
 					Debug.Log("timer :" + Time.realtimeSinceStartup);
 				}
 		);
-		
+
+
+		btn_stop.onClick.AsObservable ()
+			.Subscribe ((_) => {
+				Debug.Log("stop timer");
+				stream1.Dispose();
+		});
+
+
 
 
 	
