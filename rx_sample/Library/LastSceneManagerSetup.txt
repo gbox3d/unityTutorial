@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/rxex3_trigger_repeat/rxex3_update_trigger_repeat.unity
+- path: Assets/rxex11.scan/scene.unity
   isLoaded: 1
   isActive: 1
