@@ -37,7 +37,7 @@ public class rxex10_combine_1 : MonoBehaviour {
 			.Repeat ()
 			.Subscribe (x => {
 				Debug.Log(" drag-1 ");
-				//Debug.Log(x.ToString());
+				Debug.Log(x.ToString());
 			})
 			.AddTo (this.gameObject);
 

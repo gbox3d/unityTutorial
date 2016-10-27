@@ -28,7 +28,7 @@ public class exam10_uirx_drag : MonoBehaviour {
 			.Where (x => x)
 			.Select (_ => {
 				//Debug.Log("down start! : " + Time.realtimeSinceStartup);
-				Debug.Log( " downstream " + (Input.mousePosition - this.transform.position).ToString() + " : " + Time.realtimeSinceStartup);
+				//Debug.Log( " downstream " + (Input.mousePosition - this.transform.position).ToString() + " : " + Time.realtimeSinceStartup);
 				return Input.mousePosition - this.transform.position;
 			});
 
@@ -83,7 +83,7 @@ public class exam10_uirx_drag : MonoBehaviour {
 //				Debug.Log( "down 1" + _[0].ToString());
 				//Debug.Log( "down 2" + (Input.mousePosition - this.transform.position).ToString() );
 
-				Debug.Log( " combine " + (  Input.mousePosition - this.transform.position).ToString() + " : " + Time.realtimeSinceStartup);
+				//Debug.Log( " combine " + (  Input.mousePosition - this.transform.position).ToString() + " : " + Time.realtimeSinceStartup);
 
 				return _[1]-_[0];
 			})
