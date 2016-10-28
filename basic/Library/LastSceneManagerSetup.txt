@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/exam5/ex5.collider.unity
+- path: Assets/exam12.direct_coll_check/scene.unity
   isLoaded: 1
   isActive: 1

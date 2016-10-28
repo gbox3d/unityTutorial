@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ex6_container_adv/ex6.container.unity
+- path: Assets/ex7.regex/ex7.unity
   isLoaded: 1
   isActive: 1
