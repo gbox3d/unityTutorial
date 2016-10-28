@@ -75,6 +75,9 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 
 
 					} else {
+
+							//http://answers.unity3d.com/questions/781643/unity-46-beta-rect-transform-position-new-ui-syste.html
+
 							this.transform.position = cur_mpos - down_pos;
 					}
 					break;

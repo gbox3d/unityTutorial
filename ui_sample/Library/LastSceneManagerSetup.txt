@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/exam10.uirx_drag.v2/scene.unity
+- path: Assets/exam12.ui.scrollview/scene.unity
   isLoaded: 1
   isActive: 1
