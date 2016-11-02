@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scene.unity
+- path: Assets/ex2.containers/3.sort/scene.unity
   isLoaded: 1
   isActive: 1
