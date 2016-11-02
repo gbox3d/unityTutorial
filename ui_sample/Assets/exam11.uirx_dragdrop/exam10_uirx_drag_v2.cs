@@ -56,6 +56,24 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 								nFsm = 0;
 								Debug.Log("drag end");
 
+
+								Bounds bound_this = RectTransformUtility.CalculateRelativeRectTransformBounds(transform);
+								Bounds bound_dropper = RectTransformUtility.CalculateRelativeRectTransformBounds(dropper.transform);
+
+								Debug.Log(bound_this);
+
+								bound_this.center = transform.position;
+								bound_dropper.center = dropper.transform.position;
+
+								//collusion check 
+								if(bound_dropper.Intersects(bound_this)) {
+									Debug.Log("hit!");
+									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.blue;
+								}
+								else {
+									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.white;
+								}
+								/*
 								//collusion check
 								Rect rt1 = new Rect(
 									this.GetComponent<RectTransform>().position.x - this.GetComponent<RectTransform>().rect.width/2,
@@ -78,6 +96,7 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 								else {
 									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.white;
 								}
+								*/
 							} else {
 
 								//http://answers.unity3d.com/questions/781643/unity-46-beta-rect-transform-position-new-ui-syste.html
