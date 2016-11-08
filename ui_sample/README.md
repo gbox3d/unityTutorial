@@ -29,3 +29,21 @@ GUI객체 인스턴싱예제
 
 ##예제 10
 RectTransform에 대한 마우스 드레그 효과 예제 
+
+##예제 11
+rectTransform 의 bound를 구하여 2디 충동검사에 응용하는 예제.
+collusion2d 컴포넌트 없이 직접 충돌을 구할때 사용.
+mybound = RectTransformUtility.CalculateRelativeRectTransformBounds(transform)
+
+
+##예제 14
+RectTransformUtility 사용 예제
+
+1. ScreenPointToWorldPointInRectangle
+gameobject.position에 넣을 좌표로 만들어 주기 위한 함수. 
+마우스 좌표를 유니티의 recttransform 처리 하는 2d  좌표 맞게 바궈주는 예제
+ 마우스좌표를 ScreenPointToWorldPointInRectangle 로 변환하여 나온 결과를 원하는 오브잭트(recttransform)의 position에 넣어주면
+ 마우스 커서의 위치에 오게된다.
+
+2. RectangleContainsScreenPoint 
+현재의 마우스 좌표가 해당 영역(RectTransform)안에 있는지 검사한다

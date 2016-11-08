@@ -50,60 +50,63 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 					break;
 				case 10:
 					//Debug.Log(Input.GetMouseButton(0));
-						{
-							bool btn_down = Input.GetMouseButton (0);
-							if (btn_down == false) {
-								nFsm = 0;
-								Debug.Log("drag end");
+					{
+						bool btn_down = Input.GetMouseButton (0);
+						if (btn_down == false) {
+							nFsm = 0;
+							Debug.Log("drag end");
+
+							Bounds bound_this = RectTransformUtility.CalculateRelativeRectTransformBounds(transform);
+							Bounds bound_dropper = RectTransformUtility.CalculateRelativeRectTransformBounds(dropper.transform);
 
 
-								Bounds bound_this = RectTransformUtility.CalculateRelativeRectTransformBounds(transform);
-								Bounds bound_dropper = RectTransformUtility.CalculateRelativeRectTransformBounds(dropper.transform);
 
-								Debug.Log(bound_this);
+							Debug.Log(bound_this);
 
-								bound_this.center = transform.position;
-								bound_dropper.center = dropper.transform.position;
+							bound_this.center = transform.position;
+							bound_dropper.center = dropper.transform.position;
 
-								//collusion check 
-								if(bound_dropper.Intersects(bound_this)) {
-									Debug.Log("hit!");
-									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.blue;
-								}
-								else {
-									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.white;
-								}
-								/*
-								//collusion check
-								Rect rt1 = new Rect(
-									this.GetComponent<RectTransform>().position.x - this.GetComponent<RectTransform>().rect.width/2,
-									this.GetComponent<RectTransform>().position.y - this.GetComponent<RectTransform>().rect.height/2,
-									this.GetComponent<RectTransform>().rect.width,
-									this.GetComponent<RectTransform>().rect.height
-								);
-
-								Rect rt2 = new Rect(
-									dropper.GetComponent<RectTransform>().position.x - dropper.GetComponent<RectTransform>().rect.width/2,
-									dropper.GetComponent<RectTransform>().position.y - dropper.GetComponent<RectTransform>().rect.height/2,
-									dropper.GetComponent<RectTransform>().rect.width,
-									dropper.GetComponent<RectTransform>().rect.height
-								);
-
-
-								if( rt2.Overlaps(rt1) == true ) {
-									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.blue;
-								}
-								else {
-									dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.white;
-								}
-								*/
-							} else {
-
-								//http://answers.unity3d.com/questions/781643/unity-46-beta-rect-transform-position-new-ui-syste.html
-								//this.GetComponent<RectTransform>().anchoredPosition = cur_mpos - screen_center;
-								this.GetComponent<RectTransform>().anchoredPosition = (cur_mpos - down_pos)- screen_center;
+							//collusion check 
+							if(bound_dropper.Intersects(bound_this)) {
+								Debug.Log("hit!");
+								dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.blue;
 							}
+							else {
+								dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.white;
+							}
+							/*
+							//collusion check
+							Rect rt1 = new Rect(
+								this.GetComponent<RectTransform>().position.x - this.GetComponent<RectTransform>().rect.width/2,
+								this.GetComponent<RectTransform>().position.y - this.GetComponent<RectTransform>().rect.height/2,
+								this.GetComponent<RectTransform>().rect.width,
+								this.GetComponent<RectTransform>().rect.height
+							);
+
+							Rect rt2 = new Rect(
+								dropper.GetComponent<RectTransform>().position.x - dropper.GetComponent<RectTransform>().rect.width/2,
+								dropper.GetComponent<RectTransform>().position.y - dropper.GetComponent<RectTransform>().rect.height/2,
+								dropper.GetComponent<RectTransform>().rect.width,
+								dropper.GetComponent<RectTransform>().rect.height
+							);
+
+
+							if( rt2.Overlaps(rt1) == true ) {
+								dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.blue;
+							}
+							else {
+								dropper.transform.FindChild("Panel").GetComponent<Image>().color = Color.white;
+							}
+							*/
+						} else {
+
+							//http://answers.unity3d.com/questions/781643/unity-46-beta-rect-transform-position-new-ui-syste.html
+							//this.GetComponent<RectTransform>().anchoredPosition = cur_mpos - screen_center;
+							//this.GetComponent<RectTransform>().anchoredPosition = (cur_mpos - down_pos)- screen_center;
+							this.GetComponent<RectTransform>().position = (cur_mpos - down_pos);
+
 						}
+					}
 					
 					break;
 				}
