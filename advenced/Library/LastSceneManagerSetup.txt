@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ex12.system/2.fileio/scene.unity
+- path: Assets/json_exam2/json_exam2.unity
   isLoaded: 1
   isActive: 1

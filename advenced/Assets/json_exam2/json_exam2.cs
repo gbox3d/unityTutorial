@@ -20,6 +20,7 @@ public class json_exam2 : MonoBehaviour {
 		JsonData test_json = new JsonData ();
 		test_json ["test_int"] = 1;
 		test_json ["test_str"] = "hello json";
+		test_json["test_array"] =  JsonMapper.ToObject("[1,2,3]");
 
 		//json -> string
 		Debug.Log (test_json.ToJson ());
