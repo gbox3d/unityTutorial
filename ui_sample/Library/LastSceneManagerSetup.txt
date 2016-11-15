@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/exam11.uirx_dragdrop/scene.unity
+- path: Assets/exam14.rectutil/scene.unity
   isLoaded: 1
   isActive: 1

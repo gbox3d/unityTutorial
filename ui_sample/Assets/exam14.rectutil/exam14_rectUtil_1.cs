@@ -11,9 +11,34 @@ public class exam14_rectUtil_1 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//GameObject test_1 = GameObject.Find ("test1");
+		GameObject target_area = GameObject.Find ("target_area");
+		GameObject test_4 = GameObject.Find ("test4");
+
 		GameObject test_2 = GameObject.Find ("test2");
 		//GameObject Canvas_1 = GameObject.Find ("Canvas");
+
+		//mouse point -> transform.position
+		this.UpdateAsObservable ()
+			.Select (_ => Input.mousePosition)
+			.Where(_=>Input.GetMouseButtonDown(1))
+			.Subscribe((x)=> {
+
+				if( RectTransformUtility.RectangleContainsScreenPoint(
+					target_area.GetComponent<RectTransform>(),
+					x) == true) {
+					Vector3 world_pos;
+					RectTransformUtility.ScreenPointToWorldPointInRectangle(
+						gameObject.GetComponent<RectTransform>(),
+						//null,
+						x,
+						Camera.current,
+						out world_pos
+					);
+					test_4.transform.position = world_pos;
+				}
+				
+			});
+
 
 		this.UpdateAsObservable ()
 			.Select (_ => Input.mousePosition)
