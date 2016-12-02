@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+//using System.Collections;
 
 using UnityEngine.UI;
 
@@ -12,12 +12,12 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 	void Start () {
 
 		GameObject dropper = GameObject.Find ("dropper");
-		GameObject panel = this.transform.FindChild ("Panel").gameObject;
+		GameObject panel = transform.FindChild ("Panel").gameObject;
 
 		/* Hover */
 		this.UpdateAsObservable ()
-			.Select (_ => this.GetComponent<RectTransform> ().rect.Contains (
-				Input.mousePosition - this.transform.position
+			.Select (_ => GetComponent<RectTransform> ().rect.Contains (
+				Input.mousePosition - transform.position
 			))
 			.DistinctUntilChanged () // remove duplicates
 			.Subscribe (isHover => panel.GetComponent<Image> ().color = 
@@ -27,7 +27,7 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 		{
 			
 			int nFsm = 0;
-			Vector3 screen_center = new Vector3 (Screen.width/2,Screen.height/2,0);
+			//Vector3 screen_center = new Vector3 (Screen.width/2,Screen.height/2,0);
 			Vector3 down_pos = Input.mousePosition;
 			this.UpdateAsObservable ()
 				.Select (_ => Input.mousePosition)
@@ -39,11 +39,11 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 						{
 							bool btn_down = Input.GetMouseButtonDown (0);
 							if (btn_down == true 
-								&& gameObject.GetComponent<RectTransform>().rect.Contains(cur_mpos - this.transform.position)
+								&& gameObject.GetComponent<RectTransform>().rect.Contains(cur_mpos - transform.position)
 							) {		
 								nFsm = 10; //start darg
 								Debug.Log("drag start");
-								down_pos = cur_mpos - this.transform.position;
+								down_pos = cur_mpos - transform.position;
 							}
 						}
 					
@@ -103,7 +103,7 @@ public class exam10_uirx_drag_v2 : MonoBehaviour {
 							//http://answers.unity3d.com/questions/781643/unity-46-beta-rect-transform-position-new-ui-syste.html
 							//this.GetComponent<RectTransform>().anchoredPosition = cur_mpos - screen_center;
 							//this.GetComponent<RectTransform>().anchoredPosition = (cur_mpos - down_pos)- screen_center;
-							this.GetComponent<RectTransform>().position = (cur_mpos - down_pos);
+							GetComponent<RectTransform>().position = (cur_mpos - down_pos);
 
 						}
 					}

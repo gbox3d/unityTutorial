@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/json_exam2/json_exam2.unity
+- path: Assets/json_exam/json_exam2/json_exam2.unity
   isLoaded: 1
   isActive: 1
