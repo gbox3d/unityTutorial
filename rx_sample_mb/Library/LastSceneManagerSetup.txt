@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/touch_exam/scene.unity
-  isLoaded: 1
-  isActive: 1
