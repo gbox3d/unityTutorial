@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/sound_ex2/home.unity
-  isLoaded: 1
-  isActive: 1

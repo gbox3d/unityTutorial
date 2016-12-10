@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/animex4/animex4.unity
-  isLoaded: 1
-  isActive: 1

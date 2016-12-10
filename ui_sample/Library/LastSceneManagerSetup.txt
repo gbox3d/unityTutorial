@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/exam10.uirx_drag/exam10_uirx_drag.unity
-  isLoaded: 1
-  isActive: 1
