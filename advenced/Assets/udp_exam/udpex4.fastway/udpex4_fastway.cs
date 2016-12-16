@@ -41,7 +41,7 @@ public class udpex4_fastway : MonoBehaviour {
 	//public  UdpReceiverRx  _udpReceiverRx; 
 	//private  IObservable < UdpState >  _udpSequence ; 
 
-	private int listenPort = 8086;
+	private int listenPort = 1999;
 	private static UdpClient myClient;
 	private bool isAppQuitting;
 	public IObservable<UdpState> _udpSequence;
@@ -85,14 +85,12 @@ public class udpex4_fastway : MonoBehaviour {
 			. Publish () 
 			. RefCount (); 
 
-
-		//myUdpSequence  =  _udpReceiverRx . _udpSequence ; 
-
-
 		_udpSequence 
 			. ObserveOnMainThread () 
 			. Subscribe ( x  => { 
-				print ( x . UdpMsg ); 
+				Debug.Log ( x . UdpMsg ); 
+				Debug.Log ( "receive remote ip :" + x . EndPoint.Address ); 
+				Debug.Log ( "receive remote port :" + x . EndPoint.Port ); 
 			}) 
 			. AddTo ( this ); 
 
