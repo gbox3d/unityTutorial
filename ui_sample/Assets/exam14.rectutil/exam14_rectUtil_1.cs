@@ -18,21 +18,24 @@ public class exam14_rectUtil_1 : MonoBehaviour {
 		//GameObject Canvas_1 = GameObject.Find ("Canvas");
 
 		//mouse point -> transform.position
+		//사각형 영역에다가 대고 마우스 우측버튼을 누루면 해당위치로 이동한다.
 		this.UpdateAsObservable ()
 			.Select (_ => Input.mousePosition)
 			.Where(_=>Input.GetMouseButtonDown(1))
 			.Subscribe((x)=> {
 
+//사각형영에 충돌검사 
 				if( RectTransformUtility.RectangleContainsScreenPoint(
 					target_area.GetComponent<RectTransform>(),
 					x) == true) {
 					Vector3 world_pos;
+					//사각형 영역내에서 마우스 포인터를 충돌좌표로 변환 
 					RectTransformUtility.ScreenPointToWorldPointInRectangle(
-						gameObject.GetComponent<RectTransform>(),
+						gameObject.GetComponent<RectTransform>(), //대상이 되는 사각형 좌표 
 						//null,
 						x,
 						Camera.current,
-						out world_pos
+						out world_pos //사각형 영역좌표
 					);
 					test_4.transform.position = world_pos;
 				}
