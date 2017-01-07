@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/exam12.direct_coll_check/scene.unity
-  isLoaded: 1
-  isActive: 1
