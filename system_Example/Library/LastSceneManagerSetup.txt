@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/1.fileio_exam/3.directory/scene.unity
+  isLoaded: 1
+  isActive: 1
