@@ -70,9 +70,6 @@ public class ex14_RectTranformUtil2 : MonoBehaviour
 					wp_log.text = cur_mpos.ToString() + "," + temp_pt3d.ToString();
 				}
 
-
-
-
 			});
 
 	}
