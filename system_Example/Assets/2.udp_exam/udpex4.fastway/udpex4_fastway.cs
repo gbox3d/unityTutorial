@@ -9,6 +9,8 @@ using System.Net.Sockets;
 
 using System.Threading;
 
+using UnityEngine.UI;
+
 //http://qiita.com/Napier_271828_/items/0d489c7d833047241079
 
 public class UdpState : System.IEquatable<UdpState>
@@ -46,6 +48,9 @@ public class udpex4_fastway : MonoBehaviour {
 	private bool isAppQuitting;
 	public IObservable<UdpState> _udpSequence;
 
+	[SerializeField] Button m_btnUI;
+
+
 	// Use this for initialization
 	void  Start ()  { 
 
@@ -78,6 +83,7 @@ public class udpex4_fastway : MonoBehaviour {
 						Debug . Log ( "UDP :: Receive timeout" ); 
 					} 
 				} 
+				Debug.Log("thread finish");
 				observer . OnCompleted (); 
 				return  null ; 
 			}) 
@@ -94,6 +100,17 @@ public class udpex4_fastway : MonoBehaviour {
 			}) 
 			. AddTo ( this ); 
 
+		m_btnUI.onClick.AsObservable ().Subscribe (_ => {
+
+			Debug.Log("quit");
+			isAppQuitting = true;
+			myClient.Client.Blocking = false;
+			myClient.Client.Close();
+
+
+		});
+
+
 	} 
 
 	// Update is called once per frame
@@ -103,8 +120,13 @@ public class udpex4_fastway : MonoBehaviour {
 
 	void OnApplicationQuit()
 	{
-		isAppQuitting = true;
-		myClient.Client.Blocking = false;
+		if (isAppQuitting == false) {
+			myClient.Client.Blocking = false;
+			myClient.Client.Close();
+			isAppQuitting = true;
+			
+		}
+		//myClient.Client.Blocking = false;
 	}
 
 
