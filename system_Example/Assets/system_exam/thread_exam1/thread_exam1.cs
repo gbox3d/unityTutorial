@@ -11,40 +11,27 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine.UI;
 
+
 public class thread_exam1 : MonoBehaviour {
 
 	// receiving Thread
 	Thread receiveThread;
+	bool m_isRun;
 
-	// Use this for initialization
-	void Start () {
-
-		Debug.Log("start udp Thread");
-		receiveThread = new Thread(
-			new ThreadStart(ReceiveData));
-		receiveThread.IsBackground = true;
-		receiveThread.Start();
-		
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+	[SerializeField] Button m_btnEndThread;
 
 	// receive thread
 	private  void ReceiveData()
 	{
 		//client = new UdpClient(portLocal);
-		while (true)
+		int nCount = 1;
+		while (m_isRun)
 		{
 
 			try
 			{
 				Thread.Sleep(1000);
-				Debug.Log("tick :");
+				Debug.Log("tick :" + nCount++);
 
 			}
 			catch (Exception err)
@@ -52,6 +39,33 @@ public class thread_exam1 : MonoBehaviour {
 				print(err.ToString());
 			}
 		}
+
+		Debug.Log ("thread end");
+
 	}
+
+	// Use this for initialization
+	void Start () {
+
+		m_isRun = true;
+
+		Debug.Log("start udp Thread");
+		receiveThread = new Thread(
+			new ThreadStart(ReceiveData));
+		receiveThread.IsBackground = true;
+		receiveThread.Start();
+
+		m_btnEndThread.OnClickAsObservable ()
+			.Subscribe (_ => {
+				m_isRun = false;
+		});
+
+		Observable.OnceApplicationQuit ()
+			.Subscribe (_ => {
+				Debug.Log("OnceApplicationQuit");
+				m_isRun = false;
+			}).AddTo(this);
+	}
+
 
 }
