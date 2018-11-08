@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{96952A06-E01E-705D-8AC2-209B65D96325}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/exam2/ex2_movetest.cs">
+    <Files>
+      <File FileName="Assets/exam1/ex1_shot.cs" Line="1" Column="1" />
+      <File FileName="Assets/exam1/ex1_move1.cs" Line="1" Column="1" />
+      <File FileName="Assets/exam2/ex2_movetest.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
