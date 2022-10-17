@@ -1,3 +1,7 @@
 .vs/
-Assets/
+Assets/*
+!Assets/Scenes/
+
 Library/
+
+obj/
