@@ -1,20 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-
-
-public class planeTestEditor : MonoBehaviour
+[CustomEditor(typeof(planeTest))]
+public class planeTestEditor : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnInspectorGUI()
     {
-        
-    }
+        DrawDefaultInspector();
 
-    // Update is called once per frame
-    void Update()
-    {
+        planeTest myTarget = (planeTest)target;
+
+        EditorGUILayout.LabelField("----- This is a custom editor -----");
+
+        if (GUILayout.Button("calculate"))
+        {
+            myTarget.UpdatePlane();
+            Debug.Log($"Button pressed : {myTarget.GetDistanceToTarget()}");
+
+        }
+
+        // void OnSceneGUI()
+        // {
+        //     planeTest myTarget = (planeTest)target;
+        //     myTarget.UpdatePlane();
+        // }
+
         
+
+
     }
 }
