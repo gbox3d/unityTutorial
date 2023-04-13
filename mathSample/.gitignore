@@ -1,0 +1,10 @@
+.vs/
+Library/
+obj/
+Temp/
+.vsconfig
+UserSettings/
+ProjectSettings/
+Packages/package-lock.json
+
+Assets/TextMesh Pro/
