@@ -16,8 +16,12 @@ public class planeTestEditor : Editor
 
         if (GUILayout.Button("calculate"))
         {
-            myTarget.UpdatePlane();
-            Debug.Log($"Button pressed : {myTarget.GetDistanceToTarget()}");
+
+            // myTarget.UpdatePlane();
+            // Debug.Log($"Button pressed : {myTarget.GetDistanceToTarget()}");
+
+            // myTarget.changeColor();            
+
 
         }
 
@@ -27,7 +31,7 @@ public class planeTestEditor : Editor
         //     myTarget.UpdatePlane();
         // }
 
-        
+
 
 
     }

@@ -1,42 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class planeTest : MonoBehaviour
 {
     public GameObject mTarget;
 
+    public TextMeshPro mInfoText;
+
     public Plane myPlane;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdatePlane();
-        //myPlane = new Plane(transform.up, transform.position);
-
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        UpdatePlane();
+
+        //rotate dummy
+        mTarget.transform.Rotate(0, 0, 45 * Time.deltaTime);
+
+        //get children of dummy
+        Transform[] children = mTarget.GetComponentsInChildren<Transform>();
+
+        string _info = "";
+
+        foreach (Transform child in children)
+        {
+            //get distance to child
+            
+            //get maerial of child
+            Renderer renderer = child.GetComponent<Renderer>();
+
+            if(renderer == null)
+                continue;
+
+            float _dist = myPlane.GetDistanceToPoint(child.position);
+
+            _info += $"child : {child.name} / dist : {_dist} , ";
+
+
+            Material _material = renderer.material;
+
+            //change color of child
+            Color color = new Color(1,1,1,1);
+            //가까울수록 blue
+            if (_dist < 5)
+            {
+                color.r = _dist / 5.0f;
+                color.g = _dist / 5.0f;
+            }
+
+            _material.color = color;
+        }
+
+        mInfoText.text = _info;
+
     }
 
     public void UpdatePlane()
     {
         myPlane = new Plane(transform.up, transform.position);
-    }
-
-    public float GetDistanceToTarget()
-    {
-        if (mTarget != null)
-        {
-            float distance = myPlane.GetDistanceToPoint(mTarget.transform.position);
-            return distance;
-        }
-
-        return 0;
     }
 
     void OnDrawGizmos()
@@ -47,7 +79,6 @@ public class planeTest : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawLine(lineStart, lineEnd);
     }
-
 
 }
 
