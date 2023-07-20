@@ -11,6 +11,7 @@ public class planeTest : MonoBehaviour
 
     public Plane myPlane;
 
+
     
 
     // Start is called before the first frame update
@@ -63,6 +64,7 @@ public class planeTest : MonoBehaviour
         }
 
         mInfoText.text = _info;
+
 
     }
 

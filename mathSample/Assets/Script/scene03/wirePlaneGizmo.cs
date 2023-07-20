@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class wirePlaneGizmo : MonoBehaviour
 {
+    public GameObject mFrameSize;
     // Start is called before the first frame update
     void Start()
     {
