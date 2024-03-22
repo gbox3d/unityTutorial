@@ -31,7 +31,7 @@ public class scene2UI : MonoBehaviour
             lineRenderer.endColor = Color.blue;
 
             // 메터리얼과 셰이더 설정
-            lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
+            lineRenderer.material = new Material(Shader.Find("Unlit/Color")); 
             lineRenderer.material.color = Color.blue;
 
             // 사인 그래프를 그리기 위한 점들을 계산
@@ -44,7 +44,7 @@ public class scene2UI : MonoBehaviour
                 float x = (i / (float)pointsCount) * xRange;
                 float y = Mathf.Sin(x);
                 points[i] = new Vector3(x - Mathf.PI, y, 0);
-            }
+            } 
 
             // LineRenderer에 점 설정
             lineRenderer.positionCount = pointsCount;
