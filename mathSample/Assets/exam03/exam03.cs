@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ public class exam03 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
         // check if the mouse is Down and not over a UI element
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
@@ -78,7 +78,7 @@ public class exam03 : MonoBehaviour
         circleGameObject.transform.position = new Vector3(centerX, centerY, centerZ);
     }
 
-    public void DrawLineShape(Vector3[] vertices, Color color,Boolean isLoop = false)
+    public Transform DrawLineShape(Vector3[] vertices, Color color,Boolean isLoop = false)
     {
         GameObject lineGameObject = new GameObject("Line");
         LineRenderer lineRenderer = lineGameObject.AddComponent<LineRenderer>();
@@ -99,6 +99,8 @@ public class exam03 : MonoBehaviour
         {
             lineRenderer.loop = true;
         }
+
+        return lineGameObject.transform;
     }
 
 
