@@ -369,3 +369,9 @@ captures/
 *.app
 
 .idea
+
+TextMesh Pro/
+Library/
+ProjectSettings/
+UserSettings/
+Temp/
