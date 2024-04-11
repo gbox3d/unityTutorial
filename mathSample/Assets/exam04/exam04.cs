@@ -10,6 +10,7 @@ public class exam04 : MonoBehaviour
     [SerializeField] Button btn_polygon;
     [SerializeField] Texture2D texture;
     [SerializeField] Button btn_Texture;
+    [SerializeField] Button btn_Texture2;
     [SerializeField] Button btn_vertexcolor;
     [SerializeField] Button btn_ClearSqure;
 
@@ -179,6 +180,61 @@ public class exam04 : MonoBehaviour
 
             //텍스춰 설정
             meshRenderer.material.mainTexture = texture;
+
+        });
+
+        btn_Texture2.onClick.AddListener(() => {
+            Debug.Log("Button_test1 Clicked");
+
+            GameObject square = new GameObject("Square");
+            
+            square.transform.parent = squareDummy;
+
+            // 위치, 크기, 회전 설정
+            square.transform.position = new (0, 0, 0);
+            square.transform.localScale = new (1, 1, 1);
+            square.transform.Rotate(0, 0, 0);
+
+            MeshFilter meshFilter = square.AddComponent<MeshFilter>();
+            MeshRenderer meshRenderer = square.AddComponent<MeshRenderer>();
+
+            Mesh mesh = new();
+            meshFilter.mesh = mesh;
+
+            // 정점 정의
+            Vector3[] vertices = new Vector3[4]
+            {
+                new (-1, -1, 0),
+                new (1, -1, 0),
+                new (1, 1, 0),
+                new (-1, 1, 0)
+            };
+            mesh.vertices = vertices;
+
+            // 삼각형 정의 (시계방향)
+            int[] triangles = new int[6] { 2, 1, 0, 0, 3, 2 };
+            mesh.triangles = triangles;
+
+            // Define UVs
+            Vector2[] uvs = new Vector2[4]
+            {
+                new(0, 0),
+                new(1, 0),
+                new(1, 1),
+                new(0, 1)
+            };
+            mesh.uv = uvs;
+
+            // 메시 속성 재계산
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+
+            // 재질 할당
+            meshRenderer.material = new(Shader.Find("Standard"))
+            {
+                //텍스춰 설정
+                mainTexture = texture
+            };
 
         });
     }
