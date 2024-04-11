@@ -230,7 +230,7 @@ public class exam04 : MonoBehaviour
             mesh.RecalculateBounds();
 
             // 재질 할당
-            meshRenderer.material = new(Shader.Find("Standard"))
+            meshRenderer.material = new(Shader.Find("Unlit/Texture"))
             {
                 //텍스춰 설정
                 mainTexture = texture
