@@ -22,7 +22,15 @@ public class testCustomEditor : Editor
         if(GUILayout.Button("This is a button")) {
             Debug.Log("Button pressed");
 
+            
+        }
+
+        if(GUILayout.Button("Gen Color")) {
             myTarget.GenColor();
+        }
+
+        if(GUILayout.Button("Reset Color")) {
+            myTarget.ResetColor();
         }
 
         GUILayout.Label("Oscillates around a base size.");

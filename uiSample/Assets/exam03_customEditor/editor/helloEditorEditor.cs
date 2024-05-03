@@ -24,6 +24,11 @@ public class helloEditorEditor : Editor
             myScript.myString = "Hello, World! " + myScript.strName ;
             Debug.Log(myScript.myString);
         }
+
+        if(GUILayout.Button("Clear")) {
+            myScript.myString = "";
+            myScript.strName = "";
+        }
     }
     
 }

@@ -36,5 +36,8 @@ public class testCustom : MonoBehaviour
         GetComponent<Renderer>().sharedMaterial.color = color;
     }
 
-
+    public void ResetColor()
+    {
+        GetComponent<Renderer>().sharedMaterial.color = Color.white;
+    }
 }
