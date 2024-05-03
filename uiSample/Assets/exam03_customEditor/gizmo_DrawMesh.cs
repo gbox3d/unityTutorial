@@ -9,28 +9,10 @@ public class gizmo_DrawMesh : MonoBehaviour
     public Quaternion rotation = Quaternion.identity;
     public Vector3 scale = Vector3.one;
 
-    // void OnDrawGizmos()
-    // {
-    //     if (mesh != null)
-    //     {
-    //         Gizmos.color = Color.green; // 기즈모의 색상을 설정
-    //         Gizmos.DrawMesh(mesh, position, rotation, scale);
-    //     }
-    // }
-
     public Color lineColor = Color.white;
 
     void OnDrawGizmos()
     {
-        if (mesh == null)
-        {
-            MeshFilter meshFilter = GetComponent<MeshFilter>();
-            if (meshFilter != null)
-            {
-                mesh = meshFilter.sharedMesh;
-            }
-        }
-
         if (mesh != null)
         {
             Gizmos.color = lineColor;
@@ -58,20 +40,8 @@ public class gizmo_DrawMesh : MonoBehaviour
                 Gizmos.DrawLine(vertices[0], vertices[1]);
                 Gizmos.DrawLine(vertices[1], vertices[2]);
                 Gizmos.DrawLine(vertices[2], vertices[0]);
-
-
-                // DrawRay(mesh.vertices[triangles[j]], mesh.vertices[triangles[j + 1]] - mesh.vertices[triangles[j]]);
-                // DrawRay(mesh.vertices[triangles[j + 1]], mesh.vertices[triangles[j + 2]] - mesh.vertices[triangles[j + 1]]);
-                // DrawRay(mesh.vertices[triangles[j + 2]], mesh.vertices[triangles[j]] - mesh.vertices[triangles[j + 2]]);
             }
         }
-
-        // GL.PopMatrix();
-    }
-
-    void DrawRay(Vector3 start, Vector3 dir)
-    {
-        Gizmos.DrawRay(start, dir);
     }
 
 
