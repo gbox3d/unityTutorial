@@ -40,8 +40,8 @@ public class gizmo_DrawMesh : MonoBehaviour
 
     void DrawWireframe()
     {
-        GL.PushMatrix();
-        GL.MultMatrix(transform.localToWorldMatrix);
+        // GL.PushMatrix();
+        // GL.MultMatrix(transform.localToWorldMatrix);
         Gizmos.color = lineColor;
 
         for (int i = 0; i < mesh.subMeshCount; i++)
@@ -49,13 +49,24 @@ public class gizmo_DrawMesh : MonoBehaviour
             int[] triangles = mesh.GetTriangles(i);
             for (int j = 0; j < triangles.Length; j += 3)
             {
-                DrawRay(mesh.vertices[triangles[j]], mesh.vertices[triangles[j + 1]] - mesh.vertices[triangles[j]]);
-                DrawRay(mesh.vertices[triangles[j + 1]], mesh.vertices[triangles[j + 2]] - mesh.vertices[triangles[j + 1]]);
-                DrawRay(mesh.vertices[triangles[j + 2]], mesh.vertices[triangles[j]] - mesh.vertices[triangles[j + 2]]);
+                Vector3[] vertices = {
+                    transform.localToWorldMatrix.MultiplyPoint(mesh.vertices[triangles[j]]),
+                    transform.localToWorldMatrix.MultiplyPoint(mesh.vertices[triangles[j + 1]]),
+                    transform.localToWorldMatrix.MultiplyPoint(mesh.vertices[triangles[j + 2]])
+                };
+
+                Gizmos.DrawLine(vertices[0], vertices[1]);
+                Gizmos.DrawLine(vertices[1], vertices[2]);
+                Gizmos.DrawLine(vertices[2], vertices[0]);
+
+
+                // DrawRay(mesh.vertices[triangles[j]], mesh.vertices[triangles[j + 1]] - mesh.vertices[triangles[j]]);
+                // DrawRay(mesh.vertices[triangles[j + 1]], mesh.vertices[triangles[j + 2]] - mesh.vertices[triangles[j + 1]]);
+                // DrawRay(mesh.vertices[triangles[j + 2]], mesh.vertices[triangles[j]] - mesh.vertices[triangles[j + 2]]);
             }
         }
 
-        GL.PopMatrix();
+        // GL.PopMatrix();
     }
 
     void DrawRay(Vector3 start, Vector3 dir)
@@ -67,12 +78,12 @@ public class gizmo_DrawMesh : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
