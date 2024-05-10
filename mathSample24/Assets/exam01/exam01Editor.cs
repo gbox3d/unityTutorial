@@ -26,25 +26,29 @@ public class exam01Editor : Editor
 
         if(GUILayout.Button("make transform")) {
 
-            //행렬 만들기
 
+            Matrix4x4 target2Matrix = script.target2.transform.localToWorldMatrix;
+
+            //행렬 만들기
             Vector3 _pos = script.targetPosition;
             Vector3 _rot = script.targetEulerAngle;
 
             Quaternion _quat = Quaternion.Euler(_rot);
 
             Matrix4x4 matrix = Matrix4x4.TRS(_pos, _quat, Vector3.one);
+            script.matrixOutput = matrix;
 
             //apply matrix target1
-            Matrix4x4 _mat = script.target1.transform.localToWorldMatrix;
-            _mat = matrix * _mat;
+            Matrix4x4 _mat = matrix;
+            // _mat =  matrix * _mat;
+            // _mat = target2Matrix * _mat;
 
             script.target1.transform.position = _mat.GetColumn(3);
             script.target1.transform.rotation = Quaternion.LookRotation(
                 _mat.GetColumn(2), //forward
                 _mat.GetColumn(1) //up
                 );
-
+            
             
         }
 

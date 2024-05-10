@@ -12,7 +12,7 @@ public class exam01 : MonoBehaviour
     public Vector3 targetPosition;
     public Vector3 targetEulerAngle;
 
-    public Matrix4x4 matrix;
+    public Matrix4x4 matrixOutput;
 
 
     
@@ -35,8 +35,21 @@ public class exam01 : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, target1.transform.position);
 
+        // Gizmos.color = Color.green;
+        // Gizmos.DrawLine(target1.transform.position, target2.transform.position);
+
+        Gizmos.color = Color.blue;
+
+        Vector3 vForward = target1.transform.localToWorldMatrix.GetColumn(2);
+
+        Gizmos.DrawRay(target1.transform.position, vForward * 2.0f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(target1.transform.position, target1.transform.right * 2.0f);
+
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(target1.transform.position, target2.transform.position);
+        Gizmos.DrawRay(target1.transform.position, target1.transform.up * 2.0f);
+
 
     }
 }
