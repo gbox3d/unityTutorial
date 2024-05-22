@@ -6,7 +6,11 @@ Temp/
 
 Assets/TextMesh Pro/
 UserSettings/
-# Assets/Knight Files/
-Assets/Knight Files*
-Assets/_*
-Assets/GridMap*
+
+test/
+test.meta*
+
+custom_package/
+Knight Files*
+
+!Knight Files/Body Parts
