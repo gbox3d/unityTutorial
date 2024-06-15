@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class controller : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     Camera viewCamera;
     Vector3 velocity;
     public float moveSpeed = 6;
